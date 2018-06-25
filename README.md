@@ -1,1 +1,1 @@
-# Watson-McGrawHill bot
+# McGraw-Hill Artificial T.A.
