@@ -7,8 +7,8 @@
 6 silly lifecycle watson-banking-chatbot@0.0.1~prestart: no script for prestart, continuing
 7 info lifecycle watson-banking-chatbot@0.0.1~start: watson-banking-chatbot@0.0.1
 8 verbose lifecycle watson-banking-chatbot@0.0.1~start: unsafe-perm in lifecycle true
-9 verbose lifecycle watson-banking-chatbot@0.0.1~start: PATH: /usr/share/npm/bin/node-gyp-bin:/home/efwoods/watson-banking-chatbot/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/java/jre1.8.0_171/bin:/usr/java/jre1.8.0_171/bin
-10 verbose lifecycle watson-banking-chatbot@0.0.1~start: CWD: /home/efwoods/watson-banking-chatbot
+9 verbose lifecycle watson-banking-chatbot@0.0.1~start: PATH: /usr/share/npm/bin/node-gyp-bin:/home/efwoods/Watson-McGrawHill/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/java/jre1.8.0_171/bin:/usr/java/jre1.8.0_171/bin
+10 verbose lifecycle watson-banking-chatbot@0.0.1~start: CWD: /home/efwoods/Watson-McGrawHill
 11 silly lifecycle watson-banking-chatbot@0.0.1~start: Args: [ '-c', 'node server.js' ]
 12 silly lifecycle watson-banking-chatbot@0.0.1~start: Returned: code: 1  signal: null
 13 info lifecycle watson-banking-chatbot@0.0.1~start: Failed to exec start script
@@ -23,7 +23,7 @@
 14 verbose stack     at maybeClose (internal/child_process.js:925:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
 15 verbose pkgid watson-banking-chatbot@0.0.1
-16 verbose cwd /home/efwoods/watson-banking-chatbot
+16 verbose cwd /home/efwoods/Watson-McGrawHill
 17 error Linux 4.15.0-23-generic
 18 error argv "/usr/bin/node" "/usr/bin/npm" "start"
 19 error node v8.10.0
