@@ -1,4 +1,4 @@
-# McGraw-Hill Study Assistant
+# Textbook Study Assistant
 ![preview](img/McGraw-Hill.png)
 This repository showcases a prototype chatbot assistant. The chatbot runs in a browser and responds to queries. To run this repository on your local machine perform the following:
 
