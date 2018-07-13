@@ -35,13 +35,16 @@ const WatsonConversationSetup = require('./lib/watson-conversation-setup');
 const DEFAULT_NAME = 'watson-banking-chatbot';
 const DISCOVERY_ACTION = 'rnr'; // Replaced RnR w/ Discovery but Assistant action is still 'rnr'.
 const DISCOVERY_DOCS = [
-  './data/discovery/docs/BankFaqRnR-DB-Failure-General.docx',
-  './data/discovery/docs/BankFaqRnR-DB-Terms-General.docx',
-  './data/discovery/docs/BankFaqRnR-e2eAO-Terms.docx',
-  './data/discovery/docs/BankFaqRnR-e2ePL-Terms.docx',
-  './data/discovery/docs/BankRnR-OMP-General.docx'
-];
+	'./data/discovery/docs/QC-textbook.doc'//,
 
+/*
+	'./data/discovery/docs/BankFaqRnR-DB-Failure-General.docx',
+	'./data/discovery/docs/BankFaqRnR-DB-Terms-General.docx',
+	'./data/discovery/docs/BankFaqRnR-e2eAO-Terms.docx',
+	'./data/discovery/docs/BankFaqRnR-e2ePL-Terms.docx',
+	'./data/discovery/docs/BankRnR-OMP-General.docx'
+*/
+];
 const LOOKUP_BALANCE = 'balance';
 const LOOKUP_TRANSACTIONS = 'transactions';
 const LOOKUP_5TRANSACTIONS = '5transactions';
@@ -694,6 +697,7 @@ function checkForLookupRequests(data, callback) {
               bestLine || 'Sorry I currently do not have an appropriate response for your query. Our customer care executive will call you in 24 hours.';
           }
 
+//          discoveryResponse = bestPassage.passage_text; 
           if (data.output.text) {
             data.output.text.push(discoveryResponse);
           }
