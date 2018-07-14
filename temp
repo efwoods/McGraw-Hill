@@ -1,0 +1,32 @@
+Here’s the HTML code:
+
+ <body>
+    <video id="bgVideo" autoplay loop poster="image.png">
+      <!-- Video is embedded in the WEBM format -->
+      <source src="video.webm" type="video/webm">
+    </video>
+  </body>
+
+The site uses CSS media queries to hide the video element on mobile devices (device width < 768 pixels).
+
+
+<style type=”text/css”>
+
+video#bgVideo {
+  position: absolute; // Play the video in full screen mode
+  top: 0px; 
+  left: 0px; 
+  min-width: 100%; 
+  min-height: 100%;
+  z-index: -1; // Put the video behind all other elements
+}
+
+@media only screen and (max-width: 768px) {
+  video {
+    display:none;
+  }
+  body{
+    background-image:url(“image.png”);
+  }
+}
+</style>

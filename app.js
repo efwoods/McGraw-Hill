@@ -48,6 +48,9 @@ const DISCOVERY_DOCS = [
 const LOOKUP_BALANCE = 'balance';
 const LOOKUP_TRANSACTIONS = 'transactions';
 const LOOKUP_5TRANSACTIONS = '5transactions';
+const CREATE_INTENTS  = 'create_intents';
+const LIST_INTENTS = 'list_intents';
+//const 
 
 const app = express();
 
@@ -644,7 +647,7 @@ function checkForLookupRequests(data, callback) {
         }
       });
     } else if (data.context.action.lookup === DISCOVERY_ACTION) {
-      console.log('************** Discovery *************** InputText : ' + payload.input.text);
+      console.log('************** Discovery *************** InputText : ' + payload.input.text + ' ' + data.context.action.lookup); // + data.context.action.lookup < ------------- new
       let discoveryResponse = '';
       if (!discoveryParams) {
         console.log('Discovery is not ready for query.');
@@ -708,7 +711,17 @@ function checkForLookupRequests(data, callback) {
           payload.context.action = {};
         });
       }
-    } else {
+    } else if (data.context.action.lookup === LIST_INTENTS) {
+      console.log('************** Discovery *************** InputText : ' + payload.input.text + ' ' + data.context.action.lookup);
+      	conversation.listIntents(payload, function(err, data) {
+  			if (err) {
+    			console.error(err);
+  			} else {
+    			console.log(JSON.stringify(data, null, 2));
+  			}
+		});
+    }
+    else {
       callback(null, data);
       return;
     }

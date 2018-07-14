@@ -6,7 +6,7 @@
 
 body {
     background-color: white;
-    background-image: url("../img/watson_power7_background.jpg");
+	background-image: url('../watson.gif');
     background-repeat:no-repeat;
     background-position:center;
     background-attachment:fixed;
@@ -14,6 +14,7 @@ body {
   	padding: 0;
   	background-size:cover;
   	}
+
 
 div {
   word-wrap: break-word;
