@@ -50,6 +50,7 @@ const LOOKUP_TRANSACTIONS = 'transactions';
 const LOOKUP_5TRANSACTIONS = '5transactions';
 const CREATE_INTENTS  = 'create_intents';
 const LIST_INTENTS = 'list_intents';
+const LIST_ENTITIES = 'list_entities'
 //const 
 
 const app = express();
@@ -671,7 +672,7 @@ function checkForLookupRequests(data, callback) {
           if (err) {
             console.error('Error searching for documents: ' + err);
           } else if (searchResponse.passages.length > 0) {
-            const bestPassage = searchResponse.passages[0];
+            const bestPassage = searchResponse.passages[0]; // THIS WILL GRAB THE ZEROETH PASSAGE
             console.log('Passage score: ', bestPassage.passage_score);
             console.log('Passage text: ', bestPassage.passage_text);
 
@@ -691,7 +692,7 @@ function checkForLookupRequests(data, callback) {
                 continue;
               }
               bestLine = line; // Best so far, but can be tail of earlier answer.
-              if (questionFound && bestLine) {
+              if (questionFound && bestLine) {											// THIS MEANS THE CODE IS SEARCHING FOR A SINGLE ANSWER AFTER A QUESTION. THE DOCUMENTS NEED TO BE IN Q&A FORMAT
                 // We found the first non-blank answer after the end of a question. Use it.
                 break;
               }
@@ -701,26 +702,104 @@ function checkForLookupRequests(data, callback) {
           }
 
 //          discoveryResponse = bestPassage.passage_text; 
+console.log('before the push');
+console.log(JSON.stringify(data, null, 2));
           if (data.output.text) {
-            data.output.text.push(discoveryResponse);
+           data.output.text.push(discoveryResponse); 	// <<<< THIS SHOWS THE DISCOVERY RESPONSE ON THE FRONT END
+console.log(JSON.stringify(data, null, 2));
           }
           // Clear the context's action since the lookup and append was completed.
           data.context.action = {};
           callback(null, data);
+
           // Clear the context's action since the lookup was completed.
           payload.context.action = {};
         });
       }
-    } else if (data.context.action.lookup === LIST_INTENTS) {
-      console.log('************** Discovery *************** InputText : ' + payload.input.text + ' ' + data.context.action.lookup);
-      	conversation.listIntents(payload, function(err, data) {
+    } else if (data.context.action.lookup === LIST_INTENTS) { // <<<<<<< work in progress
+      console.log('************** List Intents *************** InputText : ' + payload.input.text + ' ' + data.context.action.lookup);
+		console.log(data);
+      	conversation.listIntents(payload, function(err, intent_data) {
+			console.log(data);
+			console.log(intent_data);
   			if (err) {
     			console.error(err);
   			} else {
-    			console.log(JSON.stringify(data, null, 2));
-  			}
+//    			console.log(JSON.stringify(data, null, 2));
+				
+				//          discoveryResponse = bestPassage.passage_text; 
+//          		if (data.output) {
+					let i;
+					for(i =0; i < intent_data.intents.length; i++){
+						data.output.text.push(JSON.stringify(intent_data.intents[i].intent));
+						data.output.text.push(JSON.stringify(intent_data.intents[i].description));
+            			console.log(data);
+					}
+         		}
+				// Clear the context's action since the lookup and append was completed.
+		            data.context.action = {};
+          			callback(null, data);
+          		// Clear the context's action since the lookup was completed.
+          			payload.context.action = {};
+  				
+		});
+    } /* else if (data.context.action.lookup === CREATE_INTENT) { // <<<<<<< work in progress
+      console.log('************** List Intents *************** InputText : ' + payload.input.text + ' ' + data.context.action.lookup);
+		console.log(data);
+      	conversation.listIntents(payload, function(err, intent_data) {
+			console.log(data);
+			console.log(intent_data);
+  			if (err) {
+    			console.error(err);
+  			} else {
+//    			console.log(JSON.stringify(data, null, 2));
+				
+				//          discoveryResponse = bestPassage.passage_text; 
+//          		if (data.output) {
+					let i;
+					for(i =0; i < intent_data.intents.length; i++){
+						data.output.text.push(JSON.stringify(intent_data.intents[i].intent));
+						data.output.text.push(JSON.stringify(intent_data.intents[i].description));
+            			console.log(data);
+					}
+         		}
+				// Clear the context's action since the lookup and append was completed.
+		            data.context.action = {};
+          			callback(null, data);
+          		// Clear the context's action since the lookup was completed.
+          			payload.context.action = {};
+  				
+		});
+    } */
+/*	else if (data.context.action.lookup === LIST_ENTITIES) { // <<<<<<< work in progress
+      console.log('************** List Intents *************** InputText : ' + payload.input.text + ' ' + data.context.action.lookup);
+		console.log(data);
+      	conversation.listEntities(payload, function(err, entity_data) {
+			console.log(data);
+			console.log(entity_data);
+  			if (err) {
+    			console.error(err);
+  			} else {
+//    			console.log(JSON.stringify(data, null, 2));
+				
+				//          discoveryResponse = bestPassage.passage_text; 
+//          		if (data.output) {
+					let i;
+					for(i =0; i < entity_data.entities.length; i++){
+						data.output.text.push(JSON.stringify(entity_data.entities[i].intent));
+						data.output.text.push(JSON.stringify(entity_data.entities[i].description));
+            			console.log(data);
+					}
+         		}
+				// Clear the context's action since the lookup and append was completed.
+		            data.context.action = {};
+          			callback(null, data);
+          		// Clear the context's action since the lookup was completed.
+          			payload.context.action = {};
+  				
 		});
     }
+	*/
     else {
       callback(null, data);
       return;
